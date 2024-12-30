@@ -119,6 +119,9 @@ module RubyLsp
           },
         ]
 
+        debug_arguments = arguments.dup
+        debug_arguments[2] = "RUBY_LSP_DEBUGGER=true #{command}"
+
         @response_builder << create_code_lens(
           node,
           title: "Run",
@@ -139,7 +142,7 @@ module RubyLsp
           node,
           title: "Debug",
           command_name: "rubyLsp.debugTest",
-          arguments: arguments,
+          arguments: debug_arguments,
           data: { type: "debug", **grouping_data },
         )
       end
